@@ -1,4 +1,4 @@
-package ikakus.com.drink
+package ikakus.com.drink.utils
 
 import android.animation.TypeEvaluator
 

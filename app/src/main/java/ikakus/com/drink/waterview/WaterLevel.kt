@@ -47,27 +47,43 @@ class WaterLevel : FrameLayout {
         waveHelper.start()
 
         afterMeasured {
-            setPercentage(mDefaultPercentage)
+//            setDefaultPositions(mDefaultPercentage)
         }
     }
 
-    fun setPercentage(percent: Int) {
+    private fun setDefaultPositions(percent: Int) {
+        val percentHeight = height / 100
+        val newHeight = (height - percentHeight * percent)
+
+        val bottomBack = view?.findViewById(R.id.bottom_back_color)
+        val waveView = view?.findViewById(R.id.wave_view)
+
+        val botParams  = bottomBack!!.layoutParams
+        (botParams as FrameLayout.LayoutParams).setMargins(0, newHeight , 0 ,0)
+        bottomBack.layoutParams = botParams
+
+        val waveParams = waveView?.layoutParams
+        (waveParams as FrameLayout.LayoutParams).setMargins(0, newHeight , 0 ,0)
+        waveView.layoutParams = waveParams
+
+    }
+
+    fun setPercentageWithAnimation(percent: Int) {
         var mAnimationDuration = mContext?.getResources()?.getInteger(android.R.integer.config_mediumAnimTime)
 
         val percentHeight = height / 100
-        val topBack = view?.findViewById(R.id.bottom_back_color)
-        val waveView = view?.findViewById(R.id.wave_view)
         val newHeight = (height - percentHeight * percent)
 
+        val bottomBack = view?.findViewById(R.id.bottom_back_color)
+        val waveView = view?.findViewById(R.id.wave_view)
 
         var mWavesAnimation = waveView!!.animate()?.setDuration(mAnimationDuration!!.toLong())
         mWavesAnimation!!.interpolator = AccelerateDecelerateInterpolator()
         mWavesAnimation!!.y(newHeight.toFloat())
 
-        var mTopBackAnimation = topBack!!.animate()?.setDuration(mAnimationDuration!!.toLong())
+        var mTopBackAnimation = bottomBack!!.animate()?.setDuration(mAnimationDuration!!.toLong())
         mTopBackAnimation!!.interpolator = AccelerateDecelerateInterpolator()
         mTopBackAnimation!!.y(newHeight.toFloat())
-
 
     }
 

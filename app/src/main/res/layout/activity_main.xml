@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ikakus.com.drink.MainActivity">
+    tools:context="ikakus.com.drink.mainpage.MainActivity">
 
     <ikakus.com.drink.waterview.WaterLevel
         android:id="@+id/water_level"

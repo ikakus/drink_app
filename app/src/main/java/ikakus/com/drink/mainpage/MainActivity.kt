@@ -1,10 +1,11 @@
-package ikakus.com.drink
+package ikakus.com.drink.mainpage
 
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import ikakus.com.drink.mainpage.IMainView
-import ikakus.com.drink.mainpage.MainPresenter
+import android.view.View
+import android.view.ViewTreeObserver
+import ikakus.com.drink.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), IMainView {
@@ -15,14 +16,17 @@ class MainActivity : AppCompatActivity(), IMainView {
         setContentView(R.layout.activity_main)
         mPresenter = MainPresenter()
         mPresenter?.setView(this)
-        mPresenter?.initialize()
         button.setOnClickListener {
             mPresenter?.onDrinkClicked()
+        }
+
+        button.afterMeasured {
+            mPresenter?.initialize()
         }
     }
 
     override fun setPercentWithAnim(percent: Int) {
-        water_level.setPercentage(percent)
+        water_level.setPercentageWithAnimation(percent)
         animatePercent(mPresenter?.getCurrentPercent()!!, percent)
     }
 
@@ -35,6 +39,17 @@ class MainActivity : AppCompatActivity(), IMainView {
 
     private fun setText(format: Any) {
         percentage_text.text = format.toString()
+    }
+
+    inline fun <T: View> T.afterMeasured(crossinline f: T.() -> Unit) {
+        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                if (measuredWidth > 0 && measuredHeight > 0) {
+                    viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    f()
+                }
+            }
+        })
     }
 
 }

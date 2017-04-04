@@ -5,4 +5,5 @@ package ikakus.com.drink.mainpage
  */
 interface IMainInteractor {
    fun getPercent() : Int
+   fun setPercent(percent : Int)
 }
