@@ -6,21 +6,22 @@
     <View
         android:id="@+id/top_back_color"
         android:layout_width="match_parent"
-        android:background="@color/colorBack"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/colorBack"/>
 
     <View
         android:id="@+id/bottom_back_color"
         android:layout_width="match_parent"
-        android:background="@color/colorFrontWave"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="1200dp"
+        android:background="@color/colorFrontWave"/>
 
     <ikakus.com.drink.wave.WaveView
-        android:layout_marginTop="200dp"
         android:id="@+id/wave_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="1200dp"
         android:background="@color/colorBack"
         />
 </FrameLayout>

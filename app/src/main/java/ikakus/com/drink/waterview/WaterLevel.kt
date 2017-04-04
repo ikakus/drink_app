@@ -47,7 +47,7 @@ class WaterLevel : FrameLayout {
         waveHelper.start()
 
         afterMeasured {
-//            setDefaultPositions(mDefaultPercentage)
+            setDefaultPositions(mDefaultPercentage)
         }
     }
 
@@ -59,6 +59,7 @@ class WaterLevel : FrameLayout {
         val waveView = view?.findViewById(R.id.wave_view)
 
         val botParams  = bottomBack!!.layoutParams
+        botParams.height = height
         (botParams as FrameLayout.LayoutParams).setMargins(0, newHeight , 0 ,0)
         bottomBack.layoutParams = botParams
 
