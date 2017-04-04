@@ -7,7 +7,7 @@ import ikakus.com.drink.IPresenter
  */
 class MainPresenter : IPresenter<IMainView>() {
 
-    private val mStep: Int = 5
+    private val mStep: Int = 10
     private val mMaxPercentage: Int = 100
     private var mPercentage: Int = 10
     private val mDefaultPercentage: Int = 10
@@ -31,13 +31,12 @@ class MainPresenter : IPresenter<IMainView>() {
     private fun handleOnClick() {
         if (mPercentage != mMaxPercentage) {
             mNextPercentage = mPercentage + mStep
-            mInteractor?.setPercent(mNextPercentage)
-            mView?.setPercentWithAnim(mNextPercentage)
         } else {
             mNextPercentage = mDefaultPercentage
-            mInteractor?.setPercent(mNextPercentage)
-            mView?.setPercentWithAnim(mNextPercentage)
         }
+        mView?.setPercentWithAnim(mNextPercentage)
+        mInteractor?.setPercent(mNextPercentage)
+        mPercentage = mNextPercentage
     }
 
     fun getCurrentPercent(): Int {
