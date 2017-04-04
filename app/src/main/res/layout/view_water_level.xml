@@ -4,16 +4,18 @@
              android:layout_height="match_parent">
 
 
-    <View
-        android:id="@+id/bottom_back_color"
-        android:layout_width="match_parent"
-        android:background="@color/colorFrontWave"
-        android:layout_height="match_parent"/>
+
 
     <View
         android:id="@+id/top_back_color"
         android:layout_width="match_parent"
         android:background="@color/colorBack"
+        android:layout_height="match_parent"/>
+
+    <View
+        android:id="@+id/bottom_back_color"
+        android:layout_width="match_parent"
+        android:background="@color/colorFrontWave"
         android:layout_height="match_parent"/>
 
     <ikakus.com.drink.wave.WaveView

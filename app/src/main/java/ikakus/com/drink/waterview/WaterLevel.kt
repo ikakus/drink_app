@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewTreeObserver
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.FrameLayout
 import ikakus.com.drink.R
 import ikakus.com.drink.wave.WaveHelper
@@ -18,7 +19,7 @@ class WaterLevel : FrameLayout {
 
     val mBorderColor = Color.parseColor("#3F51B5")
     val mBorderWidth = 0
-    val mDefaultPercentage = 50
+    val mDefaultPercentage = 10
     constructor(context: Context) : super(context) {
         initView(context)
     }
@@ -34,7 +35,10 @@ class WaterLevel : FrameLayout {
 
     private var view: View? = null
 
+    private var mContext: Context? = null
+
     private fun initView(context: Context) {
+        mContext = context
         view = LayoutInflater.from(context).inflate(R.layout.view_water_level, this, true)
         var waveView: WaveView = (view as View?)!!.findViewById(R.id.wave_view) as WaveView
         waveView.setBorder(mBorderWidth, mBorderColor)
@@ -48,17 +52,23 @@ class WaterLevel : FrameLayout {
     }
 
     fun setPercentage(percent: Int) {
-        val percentHeight = height / 100
-        val topBack = view?.findViewById(R.id.top_back_color)
-        val waveView = view?.findViewById(R.id.wave_view)
-        val topParams = topBack?.layoutParams
-        val newHeight = (height - percentHeight * percent)
-        topParams?.height = newHeight
-        topBack?.layoutParams = topParams
+        var mAnimationDuration = mContext?.getResources()?.getInteger(android.R.integer.config_mediumAnimTime)
 
-        val waveParams = waveView?.layoutParams
-        (waveParams as FrameLayout.LayoutParams).setMargins(0, newHeight , 0 ,0)
-        waveView.layoutParams = waveParams
+        val percentHeight = height / 100
+        val topBack = view?.findViewById(R.id.bottom_back_color)
+        val waveView = view?.findViewById(R.id.wave_view)
+        val newHeight = (height - percentHeight * percent)
+
+
+        var mWavesAnimation = waveView!!.animate()?.setDuration(mAnimationDuration!!.toLong())
+        mWavesAnimation!!.interpolator = AccelerateDecelerateInterpolator()
+        mWavesAnimation!!.y(newHeight.toFloat())
+
+        var mTopBackAnimation = topBack!!.animate()?.setDuration(mAnimationDuration!!.toLong())
+        mTopBackAnimation!!.interpolator = AccelerateDecelerateInterpolator()
+        mTopBackAnimation!!.y(newHeight.toFloat())
+
+
     }
 
     inline fun <T: View> T.afterMeasured(crossinline f: T.() -> Unit) {
