@@ -15,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
         android:orientation="horizontal">
 
         <TextView
@@ -34,9 +35,17 @@
     </LinearLayout>
 
     <Button
+        android:layout_marginBottom="50dp"
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
+        android:background="@drawable/button_round"
+        android:textSize="20sp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"
+        android:textColor="@color/colorTextActive"
         android:text="@string/drink"/>
 </FrameLayout>

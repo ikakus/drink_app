@@ -17,15 +17,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         percentage_text.text = mPercentage.toString()
         button.setOnClickListener {
-            if(mPercentage != mMaxPercentage) {
-                mNextPercentage = mPercentage + mStep
-                water_level.setPercentage(mNextPercentage)
-                animatePercent(mPercentage, mNextPercentage)
-            }else{
-                mNextPercentage = mDefaultPercentage
-                water_level.setPercentage(mNextPercentage)
-                animatePercent(mPercentage, mNextPercentage)
-            }
+            handleOnClick()
+        }
+    }
+
+    private fun handleOnClick() {
+        if (mPercentage != mMaxPercentage) {
+            mNextPercentage = mPercentage + mStep
+            water_level.setPercentage(mNextPercentage)
+            animatePercent(mPercentage, mNextPercentage)
+        } else {
+            mNextPercentage = mDefaultPercentage
+            water_level.setPercentage(mNextPercentage)
+            animatePercent(mPercentage, mNextPercentage)
         }
     }
 
@@ -40,7 +44,4 @@ class MainActivity : AppCompatActivity() {
         percentage_text.text = format.toString()
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
 }
