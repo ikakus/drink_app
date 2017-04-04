@@ -4,16 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorFrontWave"
     tools:context="ikakus.com.drink.MainActivity">
 
-    <ikakus.com.drink.wave.WaveView
-        android:id="@+id/wave_view"
+    <ikakus.com.drink.waterview.WaterLevel
+        android:id="@+id/water_level"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorBack"
-        />
+        android:layout_height="match_parent"/>
 
     <Button
         android:layout_gravity="center|bottom"

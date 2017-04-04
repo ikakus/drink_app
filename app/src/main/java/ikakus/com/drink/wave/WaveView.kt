@@ -151,7 +151,7 @@ class WaveView : ViewGroup {
      */
     private fun createShader() {
         mDefaultAngularFrequency = 2.0f * Math.PI / DEFAULT_WAVE_LENGTH_RATIO.toDouble() / width.toDouble()
-        mDefaultAmplitude = height * DEFAULT_AMPLITUDE_RATIO
+        mDefaultAmplitude = height*2 * DEFAULT_AMPLITUDE_RATIO
         mDefaultWaterLevel = height * DEFAULT_WATER_LEVEL_RATIO
         mDefaultWaveLength = width.toFloat()
 
