@@ -9,14 +9,14 @@
     <item android:state_focused="true">
         <shape android:shape="rectangle"  >
             <corners android:radius="30dip" />
-            <stroke android:width="3dip" android:color="@color/colorTextActive" />
+            <stroke android:width="2dip" android:color="@color/colorTextActive" />
             <!--<solid android:color="#58857e"/>-->
         </shape>
     </item>
     <item >
         <shape android:shape="rectangle"  >
             <corners android:radius="30dip" />
-            <stroke android:width="3dip" android:color="@color/colorTextActive" />
+            <stroke android:width="2dip" android:color="@color/colorTextActive" />
             <!--<gradient android:angle="-90" android:startColor="#8dbab3" android:endColor="#58857e" />-->
         </shape>
     </item>
