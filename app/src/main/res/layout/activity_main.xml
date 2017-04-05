@@ -48,4 +48,10 @@
         android:paddingRight="70dp"
         android:textColor="@color/colorTextActive"
         android:text="@string/drink"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"/>
 </FrameLayout>

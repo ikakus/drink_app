@@ -5,4 +5,5 @@ package ikakus.com.drink.mainpage
  */
 interface IMainView {
     fun setPercentWithAnim(percent : Int)
+    fun setHistory(history : List<Long>?)
 }

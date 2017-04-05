@@ -1,6 +1,8 @@
 package ikakus.com.drink.mainpage
 
 import ikakus.com.drink.IPresenter
+import ikakus.com.drink.history.HistoryInteractorImpl
+import ikakus.com.drink.history.IHistoryInteractor
 
 /**
  * Created by ikakus on 4/4/17.
@@ -9,19 +11,21 @@ class MainPresenter : IPresenter<IMainView>() {
 
     private val mStep: Int = 10
     private val mMaxPercentage: Int = 100
-    private var mPercentage: Int = 10
-    private val mDefaultPercentage: Int = 10
-    private var mNextPercentage: Int = 10
+    private var mCurrentPercentage: Int = 0
+    private var mNextPercentage: Int = 0
+    private val mDefaultPercentage: Int = 0
 
-    private var mInteractor: MainInteractorImpl? = MainInteractorImpl()
+    private var mPercentInteractor: IPercentInteractor? = PercentInteractorImpl()
+    private var mHistoryInteractor: IHistoryInteractor? = HistoryInteractorImpl()
 
     override fun setView(view: IMainView) {
         mView = view
     }
 
     fun initialize() {
-        mPercentage = mInteractor!!.getPercent()
-        mView?.setPercentWithAnim(mPercentage)
+        mCurrentPercentage = mPercentInteractor!!.getPercent()
+        mView?.setPercentWithAnim(mCurrentPercentage)
+        mView?.setHistory(mHistoryInteractor?.getHistoryToday())
     }
 
     fun onDrinkClicked() {
@@ -29,18 +33,21 @@ class MainPresenter : IPresenter<IMainView>() {
     }
 
     private fun handleOnClick() {
-        if (mPercentage != mMaxPercentage) {
-            mNextPercentage = mPercentage + mStep
+        if (mCurrentPercentage != mMaxPercentage) {
+            mNextPercentage = mCurrentPercentage + mStep
+            mHistoryInteractor?.addTime(System.currentTimeMillis())
         } else {
             mNextPercentage = mDefaultPercentage
+            mHistoryInteractor?.clear()
         }
         mView?.setPercentWithAnim(mNextPercentage)
-        mInteractor?.setPercent(mNextPercentage)
-        mPercentage = mNextPercentage
+        mView?.setHistory(mHistoryInteractor?.getHistoryToday())
+        mPercentInteractor?.setPercent(mNextPercentage)
+        mCurrentPercentage = mNextPercentage
     }
 
     fun getCurrentPercent(): Int {
-        mPercentage = mInteractor!!.getPercent()
-        return mPercentage
+        mCurrentPercentage = mPercentInteractor!!.getPercent()
+        return mCurrentPercentage
     }
 }

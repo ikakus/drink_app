@@ -5,7 +5,7 @@ import ikakus.com.drink.App
 /**
  * Created by ikakus on 4/4/17.
  */
-class MainInteractorImpl : IMainInteractor {
+class PercentInteractorImpl : IPercentInteractor {
     private val PREFS_FILENAME = "ikakus.com.drink"
     private val CURRENT_PERCENT = "percent"
 
@@ -20,7 +20,7 @@ class MainInteractorImpl : IMainInteractor {
     override fun getPercent(): Int {
         val context = App.instance.mContext
         val prefs = context!!.getSharedPreferences(PREFS_FILENAME, 0)
-        val percent = prefs!!.getInt(CURRENT_PERCENT, 10)
+        val percent = prefs!!.getInt(CURRENT_PERCENT, 0)
         return percent
     }
 }

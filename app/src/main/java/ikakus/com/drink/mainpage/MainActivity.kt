@@ -3,13 +3,17 @@ package ikakus.com.drink.mainpage
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewTreeObserver
 import ikakus.com.drink.R
+import ikakus.com.drink.history.HistoryAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), IMainView {
+
     private var mPresenter: MainPresenter? = null
+    private var mAdapter: HistoryAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +27,13 @@ class MainActivity : AppCompatActivity(), IMainView {
         button.afterMeasured {
             mPresenter?.initialize()
         }
+
+
+        mAdapter = HistoryAdapter(this)
+        recycler_view.layoutManager = LinearLayoutManager(this)
+        recycler_view.adapter = mAdapter
+
+
     }
 
     override fun setPercentWithAnim(percent: Int) {
@@ -41,7 +52,13 @@ class MainActivity : AppCompatActivity(), IMainView {
         percentage_text.text = format.toString()
     }
 
-    inline fun <T: View> T.afterMeasured(crossinline f: T.() -> Unit) {
+    override fun setHistory(history: List<Long>?) {
+        mAdapter?.list = history as List<Long>
+//        recycler_view.smoothScrollToPosition(history.size - 1)
+        recycler_view.scrollToPosition(history.size - 1)
+    }
+
+    inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
         viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 if (measuredWidth > 0 && measuredHeight > 0) {
@@ -51,5 +68,4 @@ class MainActivity : AppCompatActivity(), IMainView {
             }
         })
     }
-
 }
