@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import ikakus.com.drink.R
 import kotlinx.android.synthetic.main.list_layout.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -14,7 +16,7 @@ import kotlinx.android.synthetic.main.list_layout.view.*
  */
 class HistoryAdapter constructor(var context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var list : List<Long> = ArrayList()
+    var list : List<Long> = ArrayList<Long>()
     set(value) {
         field = value
         notifyDataSetChanged()
@@ -40,7 +42,8 @@ class HistoryAdapter constructor(var context: Context) : RecyclerView.Adapter<Re
 
     class Item(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindData(time: Long) {
-            itemView.textView.text = time.toString()
+            val dateString = SimpleDateFormat("hh:mm").format(Date(time))
+            itemView.textView.text = dateString
         }
     }
 }

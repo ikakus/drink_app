@@ -53,7 +53,7 @@ class WaterLevel : FrameLayout {
 
     private fun setDefaultPositions(percent: Int) {
         val percentHeight = height / 100
-        val newHeight = (height - percentHeight * percent)
+        var newHeight = (height - percentHeight * percent)
 
         val bottomBack = view?.findViewById(R.id.bottom_back_color)
         val waveView = view?.findViewById(R.id.wave_view)
@@ -73,7 +73,11 @@ class WaterLevel : FrameLayout {
         var mAnimationDuration = mContext?.getResources()?.getInteger(android.R.integer.config_mediumAnimTime)
 
         val percentHeight = height / 100
-        val newHeight = (height - percentHeight * percent)
+        var newHeight = (height - percentHeight * percent)
+        // show waves a little bit when percent is 0
+        if(percent == 0){
+            newHeight = (height - percentHeight * 5)
+        }
 
         val bottomBack = view?.findViewById(R.id.bottom_back_color)
         val waveView = view?.findViewById(R.id.wave_view)

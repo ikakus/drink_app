@@ -54,7 +54,8 @@ class MainActivity : AppCompatActivity(), IMainView {
 
     override fun setHistory(history: List<Long>?) {
         mAdapter?.list = history as List<Long>
-//        recycler_view.smoothScrollToPosition(history.size - 1)
+        // this line crashes app
+        // recycler_view.smoothScrollToPosition(history.size - 1)
         recycler_view.scrollToPosition(history.size - 1)
     }
 
