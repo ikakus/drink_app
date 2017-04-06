@@ -68,6 +68,10 @@ class MainActivity : AppCompatActivity(), IMainView {
         recycler_view.scrollToPosition(history.size - 1)
     }
 
+    override fun reset() {
+        mAdapter?.reset()
+    }
+
     inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
         viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {

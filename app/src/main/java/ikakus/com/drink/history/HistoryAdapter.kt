@@ -5,10 +5,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import ikakus.com.drink.R
 import kotlinx.android.synthetic.main.list_layout.view.*
 import java.text.SimpleDateFormat
 import java.util.*
+
+
 
 
 /**
@@ -19,8 +22,12 @@ class HistoryAdapter constructor(var context: Context) : RecyclerView.Adapter<Re
     var list : List<Long> = ArrayList<Long>()
     set(value) {
         field = value
+
         notifyDataSetChanged()
     }
+
+    private var lastPosition = -1
+
 
     constructor(context: Context, list : List<Long>) : this(context){
         this.context = context
@@ -38,6 +45,8 @@ class HistoryAdapter constructor(var context: Context) : RecyclerView.Adapter<Re
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         (holder as Item).bindData(list[position])
+        setAnimation(holder.itemView, position )
+
     }
 
     class Item(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -45,5 +54,18 @@ class HistoryAdapter constructor(var context: Context) : RecyclerView.Adapter<Re
             val dateString = SimpleDateFormat("hh:mm").format(Date(time))
             itemView.textView.text = dateString
         }
+    }
+
+    private fun setAnimation(viewToAnimate: View, position: Int) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition) {
+            val animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left)
+            viewToAnimate.startAnimation(animation)
+            lastPosition = position
+        }
+    }
+
+    fun reset() {
+        lastPosition = -1
     }
 }

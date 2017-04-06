@@ -39,6 +39,7 @@ class MainPresenter : IPresenter<IMainView>() {
         } else {
             mNextPercentage = mDefaultPercentage
             mHistoryInteractor?.clear()
+            mView?.reset()
         }
         mView?.setPercentWithAnim(mNextPercentage)
         mView?.setHistory(mHistoryInteractor?.getHistoryToday())

@@ -29,29 +29,41 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="%"
             android:textColor="@color/colorTextActive"
-            android:textSize="100sp"
-            android:text="%"/>
+            android:textSize="100sp"/>
     </LinearLayout>
 
     <Button
-        android:layout_marginBottom="80dp"
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
+        android:layout_marginBottom="80dp"
         android:background="@drawable/button_round"
-        android:textSize="20sp"
-        android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:paddingLeft="70dp"
         android:paddingRight="70dp"
+        android:paddingTop="15dp"
+        android:text="@string/drink"
         android:textColor="@color/colorTextActive"
-        android:text="@string/drink"/>
+        android:textSize="20sp"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/recycler_view"
+    <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="100dp"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            />
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="15dp"
+            android:background="@drawable/top_shadow"
+            />
+    </FrameLayout>
 </FrameLayout>
