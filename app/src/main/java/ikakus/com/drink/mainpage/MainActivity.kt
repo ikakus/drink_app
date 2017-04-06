@@ -6,9 +6,12 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewTreeObserver
+import android.view.animation.AnimationUtils
 import ikakus.com.drink.R
 import ikakus.com.drink.history.HistoryAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+
+
 
 class MainActivity : AppCompatActivity(), IMainView {
 
@@ -22,6 +25,7 @@ class MainActivity : AppCompatActivity(), IMainView {
         mPresenter?.setView(this)
         button.setOnClickListener {
             mPresenter?.onDrinkClicked()
+            scaleView(button)
         }
 
         button.afterMeasured {
@@ -34,6 +38,11 @@ class MainActivity : AppCompatActivity(), IMainView {
         recycler_view.adapter = mAdapter
 
 
+    }
+
+    fun scaleView(v: View) {
+        var slideLeftOut = AnimationUtils.loadAnimation(this, R.anim.slide_left_out);
+        v.startAnimation(slideLeftOut)
     }
 
     override fun setPercentWithAnim(percent: Int) {
