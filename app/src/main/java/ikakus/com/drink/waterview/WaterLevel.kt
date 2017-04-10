@@ -45,7 +45,7 @@ class WaterLevel : FrameLayout {
     private fun initView(context: Context) {
         mContext = context
         view = LayoutInflater.from(context).inflate(R.layout.view_water_level, this, true)
-        waveView = (view as View?)!!.findViewById(R.id.wave_view) as WaveView
+        waveView = view!!.findViewById(R.id.wave_view) as WaveView
         waveView?.setBorder(mBorderWidth, mBorderColor)
         waveView?.setShapeType(WaveView.ShapeType.SQUARE)
         val waveHelper = WaveHelper(waveView!!)
@@ -65,22 +65,21 @@ class WaterLevel : FrameLayout {
         var newHeight = (height - percentHeight * percent)
 
         val bottomBack = view?.findViewById(R.id.bottom_back_color)
-        val waveView = view?.findViewById(R.id.wave_view)
+        val waveView = view?.findViewById(R.id.wave_view) as WaveView
 
-        biggerWidth = height * 2
+        val widthExtra = width
+        biggerWidth = width + widthExtra
 
         val botParams = bottomBack!!.layoutParams
-        botParams.height = biggerWidth
+        botParams.height = height
         botParams.width = biggerWidth
-        var leftMargin = -500
 
-
-        (botParams as FrameLayout.LayoutParams).setMargins(leftMargin, newHeight, 0, 0)
+        (botParams as FrameLayout.LayoutParams).setMargins(-widthExtra/2 , newHeight, 0, 0)
         bottomBack.layoutParams = botParams
 
         val waveParams = waveView!!.layoutParams
-        waveParams.width = height
-        (waveParams as FrameLayout.LayoutParams).setMargins(leftMargin, newHeight, 0, 0)
+        waveParams.width = biggerWidth
+        (waveParams as FrameLayout.LayoutParams).setMargins(-widthExtra/2, newHeight, 0, 0)
         waveView.layoutParams = waveParams
 
     }
@@ -103,7 +102,7 @@ class WaterLevel : FrameLayout {
 
         var mTopBackAnimation = bottom_back_color!!.animate()?.setDuration(mAnimationDuration!!.toLong())
         mTopBackAnimation!!.interpolator = AccelerateDecelerateInterpolator()
-        mTopBackAnimation!!.y(newHeight.toFloat() + 10)
+        mTopBackAnimation!!.y(newHeight.toFloat() + wave_view.height/2)
 
     }
 
@@ -137,9 +136,10 @@ class WaterLevel : FrameLayout {
             waveView?.rotation = angle
             bottom_back_color?.rotation = angle
         }
-        val xPivot: Float = (biggerWidth / 4).toFloat()
-        bottom_back_color?.pivotX = xPivot
-        waveView?.pivotX = xPivot
+        bottom_back_color?.pivotX = (biggerWidth/2).toFloat()
+        bottom_back_color?.pivotY = 0f
+        waveView?.pivotX = (biggerWidth/2).toFloat()
+        waveView?.pivotY = 0f
     }
 
 
