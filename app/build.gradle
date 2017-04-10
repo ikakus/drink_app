@@ -43,6 +43,8 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.google.code.gson:gson:2.7'
+    compile 'com.github.nisrulz:sensey:1.7.0'
+
 
 }
 repositories {
